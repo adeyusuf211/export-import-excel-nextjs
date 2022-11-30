@@ -2,6 +2,7 @@ import MainProgram from "../components/mainprogram";
 import Head from "next/head";
 
 export default function Home({data}) {
+  // Komponen Utama
   return (
     <>
       <Head>
@@ -13,6 +14,7 @@ export default function Home({data}) {
   );
 }
 
+// Fungsi untuk mengambil data dari api
 export async function getStaticProps() {
   const api = await fetch("https://dummyjson.com/products?limit=100");
   const data = await api.json()

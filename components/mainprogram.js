@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Layout from "./layout"
 import * as XLSX from 'xlsx'
 
+// Untuk membuat kolom pada datatable
 const columns = [
   {
     name: "No",
@@ -39,12 +40,15 @@ const MainProgram = ({data}) => {
     const [buttonExport, setButtonExport] = useState(true);
     const [showModal, setShowModal]       = useState(false)
 
+    // Mengubah data dari excel menjadi array
     const convertToArray = (data) => {
       setTableData(data)
       setShowModal(!showModal)
     };
+    // Cek apabila datanya tidak ada
     if(!tableData) return null;
 
+    // Fungsi untuk menampilkan data dari api
     const apiData = (data) => {
         const product = data.products;
         setTableData(product);
@@ -52,6 +56,7 @@ const MainProgram = ({data}) => {
         setShowModal(!showModal)
     }
 
+    // Fungsi untuk mengimport data excel
     const importExcel = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader()
@@ -69,6 +74,7 @@ const MainProgram = ({data}) => {
         setButtonExport(false)
     }
 
+    // Fungsi untuk mengexport data kedalam excel
     const exportExcel = (data) => {
         const worksheet     = XLSX.utils.json_to_sheet(data);
         const workbook      = XLSX.utils.book_new();
@@ -76,6 +82,7 @@ const MainProgram = ({data}) => {
         XLSX.writeFile(workbook, "DataSheet.xlsx");
     }
 
+    // Untuk menampilkan data kedalam datatable
     return (
         <Layout 
             tableData={tableData} 
